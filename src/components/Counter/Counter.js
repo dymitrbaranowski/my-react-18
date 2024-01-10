@@ -4,27 +4,34 @@ import Value from "./Value";
 import "./Counter.css";
 
 class Counter extends Component {
-  state = {
-    value: 5,
+  static defaultProps = {
+    initialValue: 0,
   };
 
-  handleIncrement = () => {};
+  state = {
+    value: this.props.initialValue,
+  };
 
-  handleDecrement = () => {};
+  handleIncrement = () => {
+    this.setState((prevState) => ({
+      value: prevState.value + 1,
+    }));
+  };
+
+  handleDecrement = () => {
+    this.setState((prevState) => ({
+      value: prevState.value - 1,
+    }));
+  };
 
   render() {
     return (
       <div className="Counter">
-        <span className="Counter__value">{this.state.value}</span>
-
-        <div className="Counter__controls">
-          <button type="button" onClick={this.handleIncrement}>
-            Увеличить на 1
-          </button>
-          <button type="button" onClick={this.handleDecrement}>
-            Уменьшить на 1
-          </button>
-        </div>
+        <Value value={this.state.value} />
+        <Controls
+          onIncrement={this.handleIncrement}
+          onDecrement={this.handleDecrement}
+        />
       </div>
     );
   }
