@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import Counter from "./components/Counter";
 // import Dropdown from "./components/Dropdown";
 import ColorPicker from "./components/ColorPicker";
-// import TodoList from "./components/TodoList";
+import TodoList from "./components/TodoList";
 // import initialTodos from "./todos.json";
 
 const colorPickerOptions = [
@@ -40,14 +40,14 @@ class App extends Component {
 
         {/* <Counter initialValue={10} /> */}
         {/* <Dropdown /> */}
-        <ColorPicker options={colorPickerOptions} />
+        {/* <ColorPicker options={colorPickerOptions} /> */}
 
         {/* <div>
           <p>Общее кол-во: {totalTodoCount}</p>
           <p>Кол-во выполненных: {completedTodoCount}</p>
         </div> */}
 
-        {/* <TodoList todos={todos} onDeleteTodo={this.deleteTodo} /> */}
+        <TodoList />
       </>
     );
   }
