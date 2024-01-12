@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import shortid from 'shortid';
 // import Counter from "./components/Counter";
 // import Dropdown from "./components/Dropdown";
 // import ColorPicker from "./components/ColorPicker";
-// import TodoList from "./components/TodoList";
-// import initialTodos from "./todos.json";
+import Container from './components/Container';
+import TodoList from './components/TodoList';
+import initialTodos from './todos.json';
 
 // const colorPickerOptions = [
 //   { label: "red", color: "#F44336" },
@@ -16,24 +18,24 @@ import React, { Component } from "react";
 
 class App extends Component {
   state = {
-    // todos: initialTodos,
-    inputValue: "",
+    todos: initialTodos,
+    inputValue: '',
   };
 
-  deleteTodo = (todoId) => {
-    this.setState((prevState) => ({
-      todos: prevState.todos.filter((todo) => todo.id !== todoId),
+  deleteTodo = todoId => {
+    this.setState(prevState => ({
+      todos: prevState.todos.filter(todo => todo.id !== todoId),
     }));
   };
 
   render() {
-    // const { todos } = this.state;
+    const { todos } = this.state;
 
-    // const totalTodoCount = todos.length;
-    // const completedTodoCount = todos.reduce(
-    //   (total, todo) => (todo.completed ? total + 1 : total),
-    //   0
-    // );
+    const totalTodoCount = todos.length;
+    const completedTodoCount = todos.reduce(
+      (total, todo) => (todo.completed ? total + 1 : total),
+      0,
+    );
 
     return (
       <Container>
@@ -45,12 +47,12 @@ class App extends Component {
         {/* <Dropdown /> */}
         {/* <ColorPicker options={colorPickerOptions} /> */}
 
-        {/* <div>
+        <div>
           <p>Общее кол-во: {totalTodoCount}</p>
           <p>Кол-во выполненных: {completedTodoCount}</p>
-        </div> */}
+        </div>
 
-        {/* <TodoList todos={todos} onDeleteTodo={this.deleteTodo} /> */}
+        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
       </Container>
     );
   }
