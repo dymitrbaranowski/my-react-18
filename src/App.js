@@ -28,11 +28,11 @@ class App extends Component {
   render() {
     const { todos } = this.state;
 
-    // const totalTodoCount = todos.length;
-    // const completedTodoCount = todos.reduce(
-    //   (total, todo) => (todo.completed ? total + 1 : total),
-    //   0
-    // );
+    const totalTodoCount = todos.length;
+    const completedTodoCount = todos.reduce(
+      (total, todo) => (todo.completed ? total + 1 : total),
+      0
+    );
 
     return (
       <>
