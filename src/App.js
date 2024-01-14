@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-// import shortid from 'shortid';
-// import Counter from "./components/Counter";
-// import Dropdown from "./components/Dropdown";
+import shortid from 'shortid';
+import Counter from './components/Counter';
+import Dropdown from './components/Dropdown';
 import ColorPicker from './components/ColorPicker';
 import Container from './components/Container';
-// import TodoList from './components/TodoList';
+import TodoList from './components/TodoList';
+import TodoEditor from './components/TodoEditor';
 import Form from './components/form';
 import initialTodos from './todos.json';
 
@@ -12,6 +13,20 @@ class App extends Component {
   state = {
     todos: initialTodos,
     // inputValue: '123',
+  };
+
+  addTodo = text => {
+    console.log(text);
+
+    const todo = {
+      id: shortid.generate(),
+      text,
+      completed: false,
+    };
+
+    this.setState(prevState => ({
+      todos: [todo, ...prevState.todo],
+    }));
   };
 
   deleteTodo = todoId => {
@@ -26,29 +41,29 @@ class App extends Component {
     }, 1000);
   };
 
-  // handleNameChange = event => {
-  //   console.log(event.currentTarget.value);
-  //   this.setState({ name: event.currentTarget.value });
-  // };
+  handleNameChange = event => {
+    console.log(event.currentTarget.value);
+    this.setState({ name: event.currentTarget.value });
+  };
 
-  // handleTagChange = event => {
-  //   this.setState({ tag: event.currentTarget.value });
-  // };
+  handleTagChange = event => {
+    this.setState({ tag: event.currentTarget.value });
+  };
 
   render() {
-    // const { todos } = this.state;
+    const { todos } = this.state;
 
-    // const totalTodoCount = todos.length;
-    // const completedTodoCount = todos.reduce(
-    //   (total, todo) => (todo.completed ? total + 1 : total),
-    //   0,
-    // );
+    const totalTodoCount = todos.length;
+    const completedTodoCount = todos.reduce(
+      (total, todo) => (todo.completed ? total + 1 : total),
+      0,
+    );
 
     return (
       <Container>
         <Form onSubmit={this.formSubmitHandler} />
 
-        {/* <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Имя
             <input
@@ -68,25 +83,25 @@ class App extends Component {
             />
           </label>
           <button type="submit">Отправить</button>
-        </form> */}
-        {/* <input
+        </form>
+        <input
           type="text"
           value={this.state.inputValue}
           onChange={this.handleInputChange}
-        /> */}
+        />
 
-        {/* <h1>Состояние компонента</h1> */}
+        <h1>Состояние компонента</h1>
 
-        {/* <Counter initialValue={10} /> */}
-        {/* <Dropdown /> */}
+        <Counter initialValue={10} />
+        <Dropdown />
         <ColorPicker options={colorPickerOptions} />
-
-        {/* <div>
+        <br />
+        <div>
           <p>Общее кол-во: {totalTodoCount}</p>
           <p>Кол-во выполненных: {completedTodoCount}</p>
-        </div> */}
-
-        {/* <TodoList todos={todos} onDeleteTodo={this.deleteTodo} /> */}
+        </div>
+        <TodoEditor />
+        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
       </Container>
     );
   }
