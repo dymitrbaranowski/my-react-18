@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
-import Counter from './components/Counter';
+// import Counter from './components/Counter';
 import Dropdown from './components/Dropdown';
-import ColorPicker from './components/ColorPicker';
+// import ColorPicker from './components/ColorPicker';
 import Container from './components/Container';
 import TodoList from './components/TodoList';
 import TodoEditor from './components/TodoEditor';
-import Form from './components/form';
+// import Form from './components/form';
 import initialTodos from './todos.json';
 
 class App extends Component {
@@ -24,8 +24,8 @@ class App extends Component {
       completed: false,
     };
 
-    this.setState(prevState => ({
-      todos: [todo, ...prevState.todo],
+    this.setState(({ todos }) => ({
+      todos: [todo, ...todos],
     }));
   };
 
@@ -35,19 +35,40 @@ class App extends Component {
     }));
   };
 
-  formSubmitHandler = data => {
-    setTimeout(() => {
-      console.log(data);
-    }, 1000);
-  };
+  // formSubmitHandler = data => {
+  //   setTimeout(() => {
+  //     console.log(data);
+  //   }, 1000);
+  // };
 
-  handleNameChange = event => {
-    console.log(event.currentTarget.value);
-    this.setState({ name: event.currentTarget.value });
-  };
+  // handleNameChange = event => {
+  //   console.log(event.currentTarget.value);
+  //   this.setState({ name: event.currentTarget.value });
+  // };
 
-  handleTagChange = event => {
-    this.setState({ tag: event.currentTarget.value });
+  // handleTagChange = event => {
+  //   this.setState({ tag: event.currentTarget.value });
+  // };
+
+  toggleCompleted = todoId => {
+    // this.setState(prevState => ({
+    //   todos: prevState.todos.map(todo => {
+    //     if (todo.id === todoId) {
+    //       return {
+    //         ...todo,
+    //         completed: !todo.completed,
+    //       };
+    //     }
+
+    //     return todo;
+    //   }),
+    // }));
+
+    this.setState(({ todos }) => ({
+      todos: todos.map(todo =>
+        todo.id === todoId ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    }));
   };
 
   render() {
@@ -61,8 +82,8 @@ class App extends Component {
 
     return (
       <Container>
-        <Form onSubmit={this.formSubmitHandler} />
-
+        {/* <Form onSubmit={this.formSubmitHandler} /> */}
+        {/* 
         <form onSubmit={this.handleSubmit}>
           <label>
             Имя
@@ -88,19 +109,19 @@ class App extends Component {
           type="text"
           value={this.state.inputValue}
           onChange={this.handleInputChange}
-        />
+        /> */}
 
         <h1>Состояние компонента</h1>
 
-        <Counter initialValue={10} />
-        <Dropdown />
-        <ColorPicker options={colorPickerOptions} />
+        {/* <Counter initialValue={10} /> */}
+        {/* <Dropdown /> */}
+        {/* <ColorPicker options={colorPickerOptions} /> */}
         <br />
         <div>
           <p>Общее кол-во: {totalTodoCount}</p>
           <p>Кол-во выполненных: {completedTodoCount}</p>
         </div>
-        <TodoEditor />
+        <TodoEditor onSubmit={this.addTodo} />
         <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
       </Container>
     );
@@ -109,11 +130,11 @@ class App extends Component {
 
 export default App;
 
-const colorPickerOptions = [
-  { label: 'red', color: '#F44336' },
-  { label: 'green', color: '#4CAF50' },
-  { label: 'blue', color: '#2196F3' },
-  { label: 'grey', color: '#607D8B' },
-  { label: 'pink', color: '#E91E63' },
-  { label: 'indigo', color: '#3F51B5' },
-];
+// const colorPickerOptions = [
+//   { label: 'red', color: '#F44336' },
+//   { label: 'green', color: '#4CAF50' },
+//   { label: 'blue', color: '#2196F3' },
+//   { label: 'grey', color: '#607D8B' },
+//   { label: 'pink', color: '#E91E63' },
+//   { label: 'indigo', color: '#3F51B5' },
+// ];
