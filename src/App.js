@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
-import shortid from 'shortid';
+// import shortid from 'shortid';
 // import Counter from "./components/Counter";
 // import Dropdown from "./components/Dropdown";
-// import ColorPicker from "./components/ColorPicker";
+import ColorPicker from './components/ColorPicker';
 import Container from './components/Container';
-import TodoList from './components/TodoList';
+// import TodoList from './components/TodoList';
+import Form from './components/form';
 import initialTodos from './todos.json';
-
-// const colorPickerOptions = [
-//   { label: "red", color: "#F44336" },
-//   { label: "green", color: "#4CAF50" },
-//   { label: "blue", color: "#2196F3" },
-//   { label: "grey", color: "#607D8B" },
-//   { label: "pink", color: "#E91E63" },
-//   { label: "indigo", color: "#3F51B5" },
-// ];
 
 class App extends Component {
   state = {
     todos: initialTodos,
-    inputValue: '',
+    // inputValue: '123',
   };
 
   deleteTodo = todoId => {
@@ -28,34 +20,85 @@ class App extends Component {
     }));
   };
 
-  render() {
-    const { todos } = this.state;
+  formSubmitHandler = data => {
+    setTimeout(() => {
+      console.log(data);
+    }, 1000);
+  };
 
-    const totalTodoCount = todos.length;
-    const completedTodoCount = todos.reduce(
-      (total, todo) => (todo.completed ? total + 1 : total),
-      0,
-    );
+  // handleNameChange = event => {
+  //   console.log(event.currentTarget.value);
+  //   this.setState({ name: event.currentTarget.value });
+  // };
+
+  // handleTagChange = event => {
+  //   this.setState({ tag: event.currentTarget.value });
+  // };
+
+  render() {
+    // const { todos } = this.state;
+
+    // const totalTodoCount = todos.length;
+    // const completedTodoCount = todos.reduce(
+    //   (total, todo) => (todo.completed ? total + 1 : total),
+    //   0,
+    // );
 
     return (
       <Container>
-        <input type="text" />
+        <Form onSubmit={this.formSubmitHandler} />
+
+        {/* <form onSubmit={this.handleSubmit}>
+          <label>
+            Имя
+            <input
+              type="text"
+              name="name"
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+          </label>
+          <label>
+            Прозвище
+            <input
+              type="text"
+              name="tag"
+              value={this.state.tag}
+              onChange={this.handleChange}
+            />
+          </label>
+          <button type="submit">Отправить</button>
+        </form> */}
+        {/* <input
+          type="text"
+          value={this.state.inputValue}
+          onChange={this.handleInputChange}
+        /> */}
 
         {/* <h1>Состояние компонента</h1> */}
 
         {/* <Counter initialValue={10} /> */}
         {/* <Dropdown /> */}
-        {/* <ColorPicker options={colorPickerOptions} /> */}
+        <ColorPicker options={colorPickerOptions} />
 
-        <div>
+        {/* <div>
           <p>Общее кол-во: {totalTodoCount}</p>
           <p>Кол-во выполненных: {completedTodoCount}</p>
-        </div>
+        </div> */}
 
-        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
+        {/* <TodoList todos={todos} onDeleteTodo={this.deleteTodo} /> */}
       </Container>
     );
   }
 }
 
 export default App;
+
+const colorPickerOptions = [
+  { label: 'red', color: '#F44336' },
+  { label: 'green', color: '#4CAF50' },
+  { label: 'blue', color: '#2196F3' },
+  { label: 'grey', color: '#607D8B' },
+  { label: 'pink', color: '#E91E63' },
+  { label: 'indigo', color: '#3F51B5' },
+];
