@@ -8,22 +8,35 @@ const modalRoot = document.querySelector('#modal-root');
 export default class Modal extends Component {
   componentDidMount() {
     console.log('Modal componentDidMount');
-
-    window.addEventListener('keydown', e => {
-      if (e.code === 'Escape') {
-        console.log('Нажали ESC,нужно закрыть модалку');
-        this.props.onClose();
-      }
-    });
+    window.addEventListener('keydown', this.handleKeyDown);
   }
 
   componentWillUnmount() {
     console.log('Modal componentWillUnmount');
+    window.removeEventListener('keydown', this.handleKeyDown);
   }
+
+  handleKeyDown = e => {
+    if (e.code === 'Escape') {
+      console.log('Нажали ESC, нужно закрыть модалку');
+
+      this.props.onClose();
+    }
+  };
+
+  handleBackdropClick = event => {
+    // console.log('Кликнули в бекдроп');
+    // console.log('event.currentTarget:', event.currentTarget);
+    // console.log('event.target:', event.target);
+
+    if (event.currentTarget === event.target) {
+      this.props.onClose();
+    }
+  };
 
   render() {
     return createPortal(
-      <div className="Modal__backdrop">
+      <div className="Modal__backdrop" onClick={this.handleBackdropClick}>
         <div className="Modal__content">{this.props.children}</div>
       </div>,
       modalRoot,
